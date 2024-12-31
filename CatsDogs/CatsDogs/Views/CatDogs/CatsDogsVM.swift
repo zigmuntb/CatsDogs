@@ -31,9 +31,9 @@ final class CatsDogsVM: ObservableObject {
     
     //MARK: - Public
     func requestAnimalInformation(id: String) async throws {
-        
+        let apiPath = selection == .cat ? "thecatapi" : "thedogapi"
         do {
-            guard let catUrl = URL(string: "https://api.thecatapi.com/v1/images/\(id)") else {
+            guard let catUrl = URL(string: "https://api.\(apiPath).com/v1/images/\(id)") else {
                 throw NetworkManager.NetworkError.invalidURL
             }
             let model: AnimalInfoModel = try await networkManager.get(url: catUrl)
